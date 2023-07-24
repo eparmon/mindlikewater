@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="gene">
+        <createTable tableName="chats">
+            <column name="id" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="chats_id_PK"/>
+            </column>
+            <column name="external_id" type="BIGINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="chats_external_id_NN"
+                             unique="true" uniqueConstraintName="chats_external_id_UN"/>
+            </column>
+            <column name="active_command" type="VARCHAR(32)"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="chats"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
