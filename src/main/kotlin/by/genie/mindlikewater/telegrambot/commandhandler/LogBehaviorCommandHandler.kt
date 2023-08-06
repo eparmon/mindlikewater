@@ -9,6 +9,9 @@ import org.springframework.context.support.AbstractMessageSource
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow
 import java.util.*
 
 @Component
@@ -27,10 +30,17 @@ class LogBehaviorCommandHandler(
         if (chat.activeCommand == null) {
             chat.activeCommand = command()
             chatRepository.save(chat)
-            return SendMessage(
+            val sendMessage = SendMessage(
                 "${chat.externalId}",
                 messageSource.getMessage("log.which-behavior", null, Locale.getDefault())
             )
+            val keyboard = ReplyKeyboardMarkup(
+                trackedBehaviorRepository.findAllByChatId(chat.id!!)
+                    .map { trackedBehavior -> KeyboardRow(listOf(KeyboardButton(trackedBehavior.name!!))) }
+            )
+            keyboard.oneTimeKeyboard = true
+            sendMessage.replyMarkup = keyboard
+            return sendMessage
         }
         chat.activeCommand = null
         chatRepository.save(chat)
