@@ -11,14 +11,15 @@ class TrackedBehaviorEntry() {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
 
-    @Column(name = "tracked_behavior_id")
-    var trackedBehaviorId: Int? = null
+    @ManyToOne
+    @JoinColumn(name = "tracked_behavior_id")
+    var trackedBehavior: TrackedBehavior? = null
 
     @Column
     var timestamp: OffsetDateTime? = null
 
-    constructor(trackedBehaviorId: Int) : this() {
-        this.trackedBehaviorId = trackedBehaviorId
+    constructor(trackedBehavior: TrackedBehavior) : this() {
+        this.trackedBehavior = trackedBehavior
         this.timestamp = OffsetDateTime.now()
     }
 

@@ -51,7 +51,7 @@ class LogBehaviorCommandHandler(
                 messageSource.getMessage("log.behavior-not-found", null, Locale.getDefault())
             )
         }
-        trackedBehaviorEntryRepository.save(TrackedBehaviorEntry(trackedBehavior.get().id!!))
+        trackedBehaviorEntryRepository.save(TrackedBehaviorEntry(trackedBehavior.get()))
         return SendMessage(
             "${chat.externalId}",
             messageSource.getMessage("log.success", null, Locale.getDefault())
