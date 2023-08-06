@@ -4,4 +4,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
     <include file="db/changelog/create-chats-table.xml"/>
+    <include file="db/changelog/create-tracked_behaviors-table.xml"/>
+    <include file="db/changelog/create-tracked_behavior_entries-table.xml"/>
 </databaseChangeLog>

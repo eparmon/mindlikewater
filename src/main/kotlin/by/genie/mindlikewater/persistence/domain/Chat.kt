@@ -3,7 +3,7 @@ package by.genie.mindlikewater.persistence.domain
 import jakarta.persistence.*
 
 @Entity
-@Table(name ="chats")
+@Table(name = "chats")
 class Chat() {
 
     @Id
