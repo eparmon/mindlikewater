@@ -25,9 +25,16 @@ class Bot(
     }
 
     override fun onUpdateReceived(update: Update) {
-        val externalChatId = update.message.chatId
-        val text = update.message.text
-        log.info("Received message from chat $externalChatId: $text")
+        val (externalChatId, text) = if (update.message != null) {
+            log.info("Received message from chat ${update.message.chatId}: ${update.message.text}")
+            Pair(update.message.chatId, update.message.text)
+        } else {
+            log.info(
+                "Received callbackQuery from chat ${update.callbackQuery.message.chatId} with data " +
+                        update.callbackQuery.data
+            )
+            Pair(update.callbackQuery.message.chatId, update.callbackQuery.data)
+        }
         val chat = chatRepository.findByExternalId(externalChatId)
             .orElseGet { chatRepository.save(Chat(externalChatId)) }
         val command = chat.activeCommand ?: text
@@ -36,8 +43,10 @@ class Bot(
             commandHandler.handle(text, chat)
         } else {
             log.warning("Could not find handler for command $command")
-            SendMessage("$externalChatId",
-                messageSource.getMessage("error.unknown-command", null, Locale.getDefault()))
+            SendMessage(
+                "$externalChatId",
+                messageSource.getMessage("error.unknown-command", null, Locale.getDefault())
+            )
         }
         execute(message)
     }
