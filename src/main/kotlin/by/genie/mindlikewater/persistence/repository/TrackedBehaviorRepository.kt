@@ -8,4 +8,6 @@ interface TrackedBehaviorRepository : CrudRepository<TrackedBehavior, Int> {
 
     fun findByChatIdAndName(chatId: Int, name: String): Optional<TrackedBehavior>
 
+    fun findAllByChatId(chatId: Int): List<TrackedBehavior>
+
 }
