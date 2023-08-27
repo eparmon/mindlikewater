@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="gene">
+        <createTable tableName="foods">
+            <column name="id" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="foods_id_PK"/>
+            </column>
+            <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false" notNullConstraintName="foods_name_NN"
+                             unique="true" uniqueConstraintName="foods_name_UQ"/>
+            </column>
+            <column name="raw" type="BOOL">
+                <constraints nullable="false" notNullConstraintName="foods_raw_NN"/>
+            </column>
+            <column name="energy" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_energy_NN"/>
+            </column>
+            <column name="water" type="DECIMAL(4,1) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_water_NN"/>
+            </column>
+            <column name="carbs" type="DECIMAL(4,1) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_carbs_NN"/>
+            </column>
+            <column name="fats" type="DECIMAL(4,1) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_fats_NN"/>
+            </column>
+            <column name="proteins" type="DECIMAL(4,1) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_proteins_NN"/>
+            </column>
+            <column name="omega3" type="DECIMAL(5,2) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_omega3_NN"/>
+            </column>
+            <column name="omega6" type="DECIMAL(4,1) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_omega6_NN"/>
+            </column>
+            <column name="vitamin_b1" type="DECIMAL(3,2) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_vitaminB1_NN"/>
+            </column>
+            <column name="vitamin_b2" type="DECIMAL(3,2) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_vitaminB2_NN"/>
+            </column>
+            <column name="vitamin_b3" type="DECIMAL(4,2) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_vitaminB3_NN"/>
+            </column>
+            <column name="vitamin_b5" type="DECIMAL(4,2) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_vitaminB5_NN"/>
+            </column>
+            <column name="folate" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_folate_NN"/>
+            </column>
+            <column name="vitamin_a" type="DECIMAL(6,2) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_vitaminA_NN"/>
+            </column>
+            <column name="vitamin_e" type="DECIMAL(4,2) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_vitaminE_NN"/>
+            </column>
+            <column name="vitamin_k" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_vitaminK_NN"/>
+            </column>
+            <column name="calcium" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_calcium_NN"/>
+            </column>
+            <column name="iron" type="DECIMAL(4,1) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_iron_NN"/>
+            </column>
+            <column name="magnesium" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_magnesium_NN"/>
+            </column>
+            <column name="phosphorus" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_phosphorus_NN"/>
+            </column>
+            <column name="selenium" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_selenium_NN"/>
+            </column>
+            <column name="zinc" type="DECIMAL(3,1) UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="foods_zinc_NN"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="foods"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2" author="gene">
+        <createTable tableName="meals">
+            <column name="id" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="meals_id_PK"/>
+            </column>
+            <column name="chat_id" type="INT UNSIGNED">
+                <constraints references="chats(id)" foreignKeyName="meals_chat_id_FK"
+                             nullable="false" notNullConstraintName="meals_chat_id_NN"/>
+            </column>
+            <column name="food_id" type="INT UNSIGNED">
+                <constraints references="foods(id)" foreignKeyName="meals_food_id_FK"
+                             nullable="false" notNullConstraintName="meals_food_id_NN"/>
+            </column>
+            <column name="amount" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="meals_amount_NN"/>
+            </column>
+            <column name="timestamp" type="TIMESTAMP">
+                <constraints nullable="false" notNullConstraintName="meals_timestamp_NN"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="meals"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

@@ -21,4 +21,14 @@
             <dropTable tableName="chats"/>
         </rollback>
     </changeSet>
+
+    <changeSet id="2" author="gene">
+        <addColumn tableName="chats">
+            <column name="context" type="TEXT"/>
+        </addColumn>
+
+        <rollback>
+            <dropColumn tableName="chats" columnName="context"/>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

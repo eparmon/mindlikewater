@@ -45,13 +45,11 @@ class LogBehaviorCommandHandler(
         chat.activeCommand = null
         chatRepository.save(chat)
         val trackedBehavior = trackedBehaviorRepository.findByChatIdAndName(chat.id!!, text)
-        if (trackedBehavior.isEmpty) {
-            return SendMessage(
+            ?: return SendMessage(
                 "${chat.externalId}",
                 messageSource.getMessage("log.behavior-not-found", null, Locale.getDefault())
             )
-        }
-        trackedBehaviorEntryRepository.save(TrackedBehaviorEntry(trackedBehavior.get()))
+        trackedBehaviorEntryRepository.save(TrackedBehaviorEntry(trackedBehavior))
         return SendMessage(
             "${chat.externalId}",
             messageSource.getMessage("log.success", null, Locale.getDefault())

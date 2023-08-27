@@ -23,4 +23,13 @@
             <dropTable tableName="tracked_behaviors"/>
         </rollback>
     </changeSet>
+
+    <changeSet id="2" author="gene">
+        <addUniqueConstraint tableName="tracked_behaviors" columnNames="chat_id, name"
+                             constraintName="tracked_behaviors_chat_id_name_UQ"/>
+
+        <rollback>
+            <dropUniqueConstraint tableName="tracked_behaviors" constraintName="tracked_behaviors_chat_id_name_UQ"/>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

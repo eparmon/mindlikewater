@@ -12,7 +12,7 @@ import java.util.*
 @Component
 class BehaviorReportCommandHandler(
     private val trackedBehaviorEntryRepository: TrackedBehaviorEntryRepository,
-    private val messageSource: AbstractMessageSource
+    private val messageSource: AbstractMessageSource,
 ) : CommandHandler {
 
     override fun command(): String {

@@ -15,7 +15,7 @@ class Bot(
     private val botUsername: String,
     private val handlers: List<CommandHandler>,
     private val chatRepository: ChatRepository,
-    private val messageSource: AbstractMessageSource
+    private val messageSource: AbstractMessageSource,
 ) : TelegramLongPollingBot(token) {
 
     private val log = logger()
@@ -28,8 +28,7 @@ class Bot(
         val externalChatId = update.message.chatId
         val text = update.message.text
         log.info("Received message from chat $externalChatId: $text")
-        val chat = chatRepository.findByExternalId(externalChatId)
-            .orElseGet { chatRepository.save(Chat(externalChatId)) }
+        val chat = chatRepository.findByExternalId(externalChatId) ?: chatRepository.save(Chat(externalChatId))
         val command = chat.activeCommand ?: text
         val commandHandler = findHandler(command)
         val message = if (commandHandler != null) {

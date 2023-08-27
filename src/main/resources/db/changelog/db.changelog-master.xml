@@ -6,4 +6,5 @@
     <include file="db/changelog/create-chats-table.xml"/>
     <include file="db/changelog/create-tracked_behaviors-table.xml"/>
     <include file="db/changelog/create-tracked_behavior_entries-table.xml"/>
+    <include file="db/changelog/create-foods-and-meals-tables.xml"/>
 </databaseChangeLog>

@@ -35,7 +35,7 @@ class StartTrackingBehaviorCommandHandler(
         chatRepository.save(chat)
         return SendMessage(
             "${chat.externalId}",
-            messageSource.getMessage("track.success", arrayOf(text), Locale.getDefault())
+            messageSource.getMessage("track.success", null, Locale.getDefault())
         )
     }
 
