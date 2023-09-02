@@ -33,4 +33,16 @@
             <dropColumn tableName="tracked_behaviors" columnName="deleted_at"/>
         </rollback>
     </changeSet>
+
+    <changeSet id="3" author="gene">
+        <addColumn tableName="tracked_behaviors">
+            <column name="type" type="VARCHAR(7)" value="SIMPLE">
+                <constraints nullable="false" notNullConstraintName="tracked_behaviors_type_NN"/>
+            </column>
+        </addColumn>
+
+        <rollback>
+            <dropColumn tableName="tracked_behaviors" columnName="type"/>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

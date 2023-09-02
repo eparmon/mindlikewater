@@ -30,7 +30,7 @@ class LogBehaviorCommandHandler(
                 .map { trackedBehavior -> KeyboardRow(listOf(KeyboardButton(trackedBehavior.name!!))) }
             return messageHelper.buildSendMessage(chat, "log.which-behavior", keyboardRows)
         }
-        chatHelper.resetActiveCommand(chat)
+        chatHelper.resetActiveCommandAndContext(chat)
         val trackedBehavior = trackedBehaviorRepository.findByChatIdAndNameAndDeletedAtNull(chat.id!!, text)
             ?: return messageHelper.buildSendMessage(chat, "error.behavior-not-found")
         trackedBehaviorEntryRepository.save(TrackedBehaviorEntry(trackedBehavior))

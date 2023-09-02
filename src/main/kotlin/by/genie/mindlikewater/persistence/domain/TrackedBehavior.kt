@@ -1,5 +1,6 @@
 package by.genie.mindlikewater.persistence.domain
 
+import by.genie.mindlikewater.persistence.domain.enums.TrackingType
 import jakarta.persistence.*
 import java.time.OffsetDateTime
 
@@ -20,9 +21,14 @@ class TrackedBehavior() {
     @Column(name = "deleted_at")
     var deletedAt: OffsetDateTime? = null
 
-    constructor(chatId: Int, name: String) : this() {
+    @Column
+    @Enumerated(EnumType.STRING)
+    var type: TrackingType? = null
+
+    constructor(chatId: Int, name: String, type: TrackingType) : this() {
         this.chatId = chatId
         this.name = name
+        this.type = type
     }
 
 }
