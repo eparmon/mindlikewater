@@ -1,6 +1,7 @@
 package by.genie.mindlikewater.persistence.domain
 
 import jakarta.persistence.*
+import java.time.OffsetDateTime
 
 @Entity
 @Table(name = "tracked_behaviors")
@@ -15,6 +16,9 @@ class TrackedBehavior() {
 
     @Column
     var name: String? = null
+
+    @Column(name = "deleted_at")
+    var deletedAt: OffsetDateTime? = null
 
     constructor(chatId: Int, name: String) : this() {
         this.chatId = chatId

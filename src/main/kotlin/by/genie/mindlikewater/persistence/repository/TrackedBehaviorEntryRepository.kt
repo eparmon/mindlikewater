@@ -6,6 +6,9 @@ import java.time.OffsetDateTime
 
 interface TrackedBehaviorEntryRepository : CrudRepository<TrackedBehaviorEntry, Int> {
 
-    fun findAllByTrackedBehaviorChatIdAndTimestampAfter(chatId: Int, from: OffsetDateTime): List<TrackedBehaviorEntry>
+    fun findAllByTrackedBehaviorChatIdAndTimestampAfterAndTrackedBehaviorDeletedAtNull(
+        chatId: Int,
+        from: OffsetDateTime
+    ): List<TrackedBehaviorEntry>
 
 }
