@@ -23,4 +23,14 @@
             <dropTable tableName="tracked_behaviors"/>
         </rollback>
     </changeSet>
+
+    <changeSet id="2" author="gene">
+        <addColumn tableName="tracked_behaviors">
+            <column name="deleted_at" type="TIMESTAMP"/>
+        </addColumn>
+
+        <rollback>
+            <dropColumn tableName="tracked_behaviors" columnName="deleted_at"/>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

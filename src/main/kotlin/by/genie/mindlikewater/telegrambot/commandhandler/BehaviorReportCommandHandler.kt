@@ -12,7 +12,7 @@ import java.util.*
 @Component
 class BehaviorReportCommandHandler(
     private val trackedBehaviorEntryRepository: TrackedBehaviorEntryRepository,
-    private val messageSource: AbstractMessageSource
+    private val messageSource: AbstractMessageSource,
 ) : CommandHandler {
 
     override fun command(): String {
@@ -20,10 +20,12 @@ class BehaviorReportCommandHandler(
     }
 
     override fun handle(text: String, chat: Chat): BotApiMethodMessage {
-        val report = trackedBehaviorEntryRepository.findAllByTrackedBehaviorChatIdAndTimestampAfter(
-            chat.id!!,
-            OffsetDateTime.now().minusDays(30)
-        ).groupBy { trackedBehaviorEntry -> trackedBehaviorEntry.trackedBehavior!!.name }
+        val report = trackedBehaviorEntryRepository
+            .findAllByTrackedBehaviorChatIdAndTimestampAfterAndTrackedBehaviorDeletedAtNull(
+                chat.id!!,
+                OffsetDateTime.now().minusDays(30)
+            )
+            .groupBy { trackedBehaviorEntry -> trackedBehaviorEntry.trackedBehavior!!.name }
             .map { entry -> "${entry.key}: ${entry.value.size} times" }
             .joinToString(
                 prefix = messageSource.getMessage("report.prefix", null, Locale.getDefault()) + "\n\n",

@@ -29,7 +29,7 @@ class Bot(
         val text = update.message.text
         log.info("Received message from chat $externalChatId: $text")
         val chat = chatRepository.findByExternalId(externalChatId)
-            .orElseGet { chatRepository.save(Chat(externalChatId)) }
+            ?: chatRepository.save(Chat(externalChatId))
         val command = chat.activeCommand ?: text
         val commandHandler = findHandler(command)
         val message = if (commandHandler != null) {
