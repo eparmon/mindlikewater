@@ -14,7 +14,6 @@ import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMess
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow
-import java.time.OffsetDateTime
 import kotlin.time.Duration
 
 @Component
@@ -48,6 +47,7 @@ class LogBehaviorCommandHandler(
                     null -> error("")
                 }
             }
+
             Status.ASKED_FOR_DURATION -> logTimeBehavior(text, chat)
         }
     }
@@ -56,10 +56,7 @@ class LogBehaviorCommandHandler(
         chatHelper.updateActiveCommandAndContext(chat, command(), Context(Status.ASKED_FOR_BEHAVIOR, null))
 
         val trackedBehaviors = trackedBehaviorEntryRepository
-            .findAllByTrackedBehaviorChatIdAndTimestampAfterAndTrackedBehaviorDeletedAtNull(
-                chat.id!!,
-                OffsetDateTime.now().minusDays(30)
-            )
+            .findAllByTrackedBehaviorChatIdAndTrackedBehaviorDeletedAtNull(chat.id!!)
             .sortedByDescending(TrackedBehaviorEntry::timestamp)
             .map { trackedBehaviorEntry -> trackedBehaviorEntry.trackedBehavior!!.name }
             .distinct()
