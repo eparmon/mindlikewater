@@ -23,4 +23,14 @@
             <dropTable tableName="tracked_behavior_entries"/>
         </rollback>
     </changeSet>
+
+    <changeSet id="2" author="gene">
+        <addColumn tableName="tracked_behavior_entries">
+            <column name="duration_seconds" type="INT UNSIGNED"/>
+        </addColumn>
+
+        <rollback>
+            <dropColumn tableName="tracked_behavior_entries" columnName="duration_seconds"/>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

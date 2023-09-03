@@ -16,6 +16,9 @@ class Chat() {
     @Column(name = "active_command")
     var activeCommand: String? = null
 
+    @Column
+    var context: String? = null
+
     constructor(externalId: Long?) : this() {
         this.externalId = externalId
     }

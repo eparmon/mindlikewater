@@ -37,7 +37,7 @@ class Bot(
         } else {
             log.warning("Could not find handler for command $command")
             SendMessage("$externalChatId",
-                messageSource.getMessage("error.unknown-command", null, Locale.getDefault()))
+                messageSource.getMessage("error.instructions-unclear", null, Locale.getDefault()))
         }
         execute(message)
     }

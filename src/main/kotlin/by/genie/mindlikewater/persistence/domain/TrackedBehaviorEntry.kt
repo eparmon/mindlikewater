@@ -18,6 +18,13 @@ class TrackedBehaviorEntry() {
     @Column
     var timestamp: OffsetDateTime? = null
 
+    @Column(name = "duration_seconds")
+    var durationSeconds: Int? = null
+
+    constructor(trackedBehavior: TrackedBehavior, durationSeconds: Int) : this(trackedBehavior) {
+        this.durationSeconds = durationSeconds
+    }
+
     constructor(trackedBehavior: TrackedBehavior) : this() {
         this.trackedBehavior = trackedBehavior
         this.timestamp = OffsetDateTime.now()
