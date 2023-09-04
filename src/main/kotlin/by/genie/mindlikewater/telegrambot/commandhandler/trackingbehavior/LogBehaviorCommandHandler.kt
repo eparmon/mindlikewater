@@ -1,4 +1,4 @@
-package by.genie.mindlikewater.telegrambot.commandhandler
+package by.genie.mindlikewater.telegrambot.commandhandler.trackingbehavior
 
 import by.genie.mindlikewater.helper.ChatHelper
 import by.genie.mindlikewater.helper.MessageHelper
@@ -8,6 +8,7 @@ import by.genie.mindlikewater.persistence.domain.TrackedBehaviorEntry
 import by.genie.mindlikewater.persistence.domain.enums.TrackingType
 import by.genie.mindlikewater.persistence.repository.TrackedBehaviorEntryRepository
 import by.genie.mindlikewater.persistence.repository.TrackedBehaviorRepository
+import by.genie.mindlikewater.telegrambot.commandhandler.CommandHandler
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage
