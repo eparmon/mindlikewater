@@ -27,7 +27,7 @@ class MarkTaskAsDoneCommandHandler(
             val keyboardRows = taskRepository.findAllByChatIdAndDoneAtNull(chat.id!!)
                 .map { task -> KeyboardRow(listOf(KeyboardButton(task.name!!))) }
             if (keyboardRows.isEmpty()) {
-                return messageHelper.buildSendMessage(chat, "done.nothing-to-do")
+                return messageHelper.buildSendMessage(chat, "tasks.nothing-to-do")
             }
             chatHelper.updateActiveCommand(chat, command())
             return messageHelper.buildSendMessage(chat, "done.select-task", keyboardRows)

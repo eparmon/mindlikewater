@@ -39,6 +39,7 @@ class MessageHelper(private val messageSource: AbstractMessageSource) {
     private fun buildOneTimeKeyboard(keyboardRows: List<KeyboardRow>): ReplyKeyboard {
         val keyboard = ReplyKeyboardMarkup(keyboardRows)
         keyboard.oneTimeKeyboard = true
+        keyboard.resizeKeyboard = true
         return keyboard
     }
 
