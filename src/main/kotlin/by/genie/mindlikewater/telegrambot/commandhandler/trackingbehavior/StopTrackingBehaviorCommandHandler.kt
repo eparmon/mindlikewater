@@ -1,9 +1,10 @@
-package by.genie.mindlikewater.telegrambot.commandhandler
+package by.genie.mindlikewater.telegrambot.commandhandler.trackingbehavior
 
 import by.genie.mindlikewater.helper.ChatHelper
 import by.genie.mindlikewater.helper.MessageHelper
 import by.genie.mindlikewater.persistence.domain.Chat
 import by.genie.mindlikewater.persistence.repository.TrackedBehaviorRepository
+import by.genie.mindlikewater.telegrambot.commandhandler.CommandHandler
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton

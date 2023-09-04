@@ -1,10 +1,11 @@
-package by.genie.mindlikewater.telegrambot.commandhandler
+package by.genie.mindlikewater.telegrambot.commandhandler.trackingbehavior
 
 import by.genie.mindlikewater.persistence.domain.Chat
 import by.genie.mindlikewater.persistence.domain.TrackedBehavior
 import by.genie.mindlikewater.persistence.domain.TrackedBehaviorEntry
 import by.genie.mindlikewater.persistence.domain.enums.TrackingType
 import by.genie.mindlikewater.persistence.repository.TrackedBehaviorEntryRepository
+import by.genie.mindlikewater.telegrambot.commandhandler.CommandHandler
 import by.genie.mindlikewater.util.formatTime
 import by.genie.mindlikewater.util.isWithinLastMonth
 import org.springframework.context.support.AbstractMessageSource
