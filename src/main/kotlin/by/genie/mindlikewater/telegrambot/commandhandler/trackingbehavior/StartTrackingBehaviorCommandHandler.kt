@@ -35,12 +35,12 @@ class StartTrackingBehaviorCommandHandler(
         val context = objectMapper.readValue(chat.context, Context::class.java)
         return when (context.status) {
             Status.ASKED_FOR_NAME -> saveNameAndAskForType(text, chat)
-            Status.ASKED_FOR_STATUS -> saveTrackedBehavior(context.name!!, text, chat)
+            Status.ASKED_FOR_TYPE -> saveTrackedBehavior(context.name!!, text, chat)
         }
     }
 
     private fun saveNameAndAskForType(name: String, chat: Chat): SendMessage {
-        chatHelper.updateContext(chat, Context(Status.ASKED_FOR_STATUS, name))
+        chatHelper.updateContext(chat, Context(Status.ASKED_FOR_TYPE, name))
         return messageHelper.buildSendMessage(
             chat,
             "track.select-type",
@@ -63,12 +63,12 @@ class StartTrackingBehaviorCommandHandler(
     }
 
     private enum class Status {
-        ASKED_FOR_NAME, ASKED_FOR_STATUS
+        ASKED_FOR_NAME, ASKED_FOR_TYPE
     }
 
     private data class Context(
         val status: Status,
-        val name: String?
+        val name: String?,
     )
 
 }
